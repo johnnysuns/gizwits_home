@@ -1,0 +1,36 @@
+{
+  "title": "Gizwits",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect Gizwits",
+        "description": "Enter your Gizwits-based app account. The integration will fetch your device list automatically.",
+        "data": {
+          "username": "Username",
+          "password": "Password",
+          "app_id": "App ID",
+          "did": "Device did (optional)",
+          "device_name": "Device name (optional)",
+          "scan_interval": "Scan interval (seconds)"
+        }
+      },
+      "device": {
+        "title": "Choose device",
+        "description": "Select the Gizwits device to add.",
+        "data": {
+          "did": "Device"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid username or password",
+      "cannot_connect": "Could not connect to Gizwits",
+      "device_not_found": "Could not find the specified device",
+      "multiple_devices": "More than one device matched; use the did instead",
+      "no_devices": "No devices were found for this account"
+    },
+    "abort": {
+      "already_configured": "This device is already configured"
+    }
+  }
+}

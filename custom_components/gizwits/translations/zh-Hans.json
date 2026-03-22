@@ -1,0 +1,36 @@
+{
+  "title": "机智云",
+  "config": {
+    "step": {
+      "user": {
+        "title": "连接机智云",
+        "description": "输入基于机智云的 App 账号。集成会自动尝试获取设备列表。",
+        "data": {
+          "username": "账号",
+          "password": "密码",
+          "app_id": "App ID",
+          "did": "设备 did（可选）",
+          "device_name": "设备名称（可选）",
+          "scan_interval": "轮询间隔（秒）"
+        }
+      },
+      "device": {
+        "title": "选择设备",
+        "description": "请选择要添加的机智云设备。",
+        "data": {
+          "did": "设备"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "账号或密码错误",
+      "cannot_connect": "无法连接到机智云服务",
+      "device_not_found": "未找到指定设备",
+      "multiple_devices": "匹配到多个设备，请改用 did",
+      "no_devices": "当前账号下未找到设备"
+    },
+    "abort": {
+      "already_configured": "该设备已配置"
+    }
+  }
+}
