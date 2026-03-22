@@ -4,9 +4,9 @@
     "step": {
       "user": {
         "title": "连接机智云",
-        "description": "输入基于机智云的 App 账号。集成会自动尝试获取设备列表。",
+        "description": "输入你的机智云 App 账号信息。集成会自动尝试获取设备列表。",
         "data": {
-          "username": "账号",
+          "username": "用户名",
           "password": "密码",
           "app_id": "App ID",
           "did": "设备 did（可选）",
@@ -23,9 +23,9 @@
       }
     },
     "error": {
-      "invalid_auth": "账号或密码错误",
+      "invalid_auth": "用户名或密码错误",
       "cannot_connect": "无法连接到机智云服务",
-      "device_not_found": "未找到指定设备",
+      "device_not_found": "找不到指定设备",
       "multiple_devices": "匹配到多个设备，请改用 did",
       "no_devices": "当前账号下未找到设备"
     },
