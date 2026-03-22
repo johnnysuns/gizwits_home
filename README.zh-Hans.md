@@ -34,7 +34,11 @@
 
 ## 安装
 
-### 通过 HACS 自定义仓库安装
+### 通过 HACS 安装
+
+如果你已经能在 HACS 中看到 `gizwits_home`，可以直接在 HACS 里打开并安装。
+
+如果暂时还看不到，再先把这个仓库作为自定义仓库添加进去：
 
 1. 将此仓库推送到公开的 GitHub 仓库。
 2. 在 Home Assistant 中打开 `HACS -> Integrations -> Custom repositories`。
@@ -91,17 +95,21 @@
 
 ## HACS
 
-用户在 HACS 里通常有两种方式找到它。
+当这个仓库已经出现在 HACS 中后，就可以直接从 HACS 安装这个集成。
 
-### 1. HACS 自定义仓库
+### 1. 直接从 HACS 安装
+
+如果你已经能在 HACS 中找到 `gizwits_home`，直接在 HACS 界面里安装即可，然后再到 `Settings -> Devices & Services` 添加 `Gizwits` 集成。
+
+### 2. HACS 自定义仓库
 
 任何满足 HACS 要求的公开 GitHub 仓库，都可以通过以下入口手动添加：
 
 `HACS -> Integrations -> Custom repositories`
 
-这是最快的方式，也是大多数新集成的起点。
+这是尚未进入 HACS 默认商店之前最常见的安装方式。
 
-### 2. HACS 默认商店收录
+### 3. HACS 默认商店收录
 
 如果想让它直接出现在 HACS 默认商店中，而不是靠手动添加仓库地址，还需要：
 

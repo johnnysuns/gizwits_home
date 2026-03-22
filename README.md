@@ -34,7 +34,11 @@ If you are using another Gizwits-based app or hardware vendor, you can still try
 
 ## Install
 
-### HACS custom repository
+### HACS
+
+If you can already see `gizwits_home` in HACS, open it there and install it directly.
+
+If it does not appear yet, add this repository first:
 
 1. Push this repository to a public GitHub repository.
 2. In Home Assistant, open `HACS -> Integrations -> Custom repositories`.
@@ -92,17 +96,21 @@ Repository:
 
 ## HACS
 
-There are two ways users can find it in HACS.
+This integration can be installed from HACS once the repository is visible there.
 
-### 1. HACS custom repository
+### 1. Install from HACS
+
+If you can already find `gizwits_home` in HACS, install it from the HACS interface and then add the `Gizwits` integration from `Settings -> Devices & Services`.
+
+### 2. Add as a HACS custom repository
 
 Any public GitHub repository that meets the HACS requirements can be added manually by URL in:
 
 `HACS -> Integrations -> Custom repositories`
 
-That is the fastest path and usually how new integrations start.
+That is the usual path before an integration is included in the default HACS store.
 
-### 2. HACS default store listing
+### 3. HACS default store listing
 
 To appear in the default HACS catalog without manual repository entry, you still need to:
 
