@@ -93,35 +93,6 @@
 
 - [johnnysuns/gizwits_home](https://github.com/johnnysuns/gizwits_home)
 
-## HACS
-
-当这个仓库已经出现在 HACS 中后，就可以直接从 HACS 安装这个集成。
-
-### 1. 直接从 HACS 安装
-
-如果你已经能在 HACS 中找到 `gizwits_home`，直接在 HACS 界面里安装即可，然后再到 `Settings -> Devices & Services` 添加 `Gizwits` 集成。
-
-### 2. HACS 自定义仓库
-
-任何满足 HACS 要求的公开 GitHub 仓库，都可以通过以下入口手动添加：
-
-`HACS -> Integrations -> Custom repositories`
-
-这是尚未进入 HACS 默认商店之前最常见的安装方式。
-
-### 3. HACS 默认商店收录
-
-如果想让它直接出现在 HACS 默认商店中，而不是靠手动添加仓库地址，还需要：
-
-- 保持 GitHub 仓库公开
-- 保持标准 `custom_components/<domain>` 目录结构
-- 包含 `hacs.json`
-- 通过 HACS GitHub Action
-- 通过 `hassfest`
-- 至少创建一个 GitHub Release
-- 添加集成品牌资源
-- 向 `hacs/default` 提交收录 PR
-
 ## 参考资料
 
 - [HACS general requirements](https://hacs.xyz/docs/publish/start/)

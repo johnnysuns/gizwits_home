@@ -94,35 +94,6 @@ Repository:
 
 - [johnnysuns/gizwits_home](https://github.com/johnnysuns/gizwits_home)
 
-## HACS
-
-This integration can be installed from HACS once the repository is visible there.
-
-### 1. Install from HACS
-
-If you can already find `gizwits_home` in HACS, install it from the HACS interface and then add the `Gizwits` integration from `Settings -> Devices & Services`.
-
-### 2. Add as a HACS custom repository
-
-Any public GitHub repository that meets the HACS requirements can be added manually by URL in:
-
-`HACS -> Integrations -> Custom repositories`
-
-That is the usual path before an integration is included in the default HACS store.
-
-### 3. HACS default store listing
-
-To appear in the default HACS catalog without manual repository entry, you still need to:
-
-- keep the repository public on GitHub
-- keep the standard `custom_components/<domain>` layout
-- include `hacs.json`
-- pass the HACS GitHub Action
-- pass `hassfest`
-- create at least one GitHub Release
-- add integration brand assets
-- submit a PR to `hacs/default`
-
 ## References
 
 - [HACS general requirements](https://hacs.xyz/docs/publish/start/)
