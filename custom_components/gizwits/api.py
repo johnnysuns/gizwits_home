@@ -2,11 +2,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import ssl
 from typing import Any
 
 from aiohttp import ClientError, ClientSession
 
 from .const import DEFAULT_GIZWITS_APP_ID, GIZWITS_API_BASE
+
+# Gizwits App API only offers legacy ciphers such as AES128-SHA. OpenSSL 3.x in
+# recent Home Assistant images rejects them at the default security level.
+_AUTH_ERROR_CODES = {9005, 9015, 9020}
 
 
 class GizwitsApiError(Exception):
@@ -15,6 +20,22 @@ class GizwitsApiError(Exception):
 
 class GizwitsAuthError(GizwitsApiError):
     """Authentication error."""
+
+
+def _legacy_ssl_context() -> ssl.SSLContext:
+    context = ssl.create_default_context()
+    context.set_ciphers("DEFAULT:@SECLEVEL=1")
+    return context
+
+
+_SSL_CONTEXT = _legacy_ssl_context()
+
+
+def _is_auth_payload(payload: Any) -> bool:
+    if not isinstance(payload, dict):
+        return False
+    error_code = payload.get("error_code")
+    return isinstance(error_code, int) and error_code in _AUTH_ERROR_CODES
 
 
 @dataclass(slots=True)
@@ -66,6 +87,7 @@ class GizwitsApiClient:
                 f"{GIZWITS_API_BASE}{path}",
                 headers=self.headers,
                 json=json_body,
+                ssl=_SSL_CONTEXT,
             ) as response:
                 raw_text = await response.text()
                 payload: Any = raw_text
@@ -75,9 +97,15 @@ class GizwitsApiClient:
                     except json.JSONDecodeError:
                         payload = raw_text
 
-                if response.status == 401 and not allow_401:
+                if response.status == 401:
+                    if allow_401:
+                        return payload
                     raise GizwitsAuthError("Unauthorized")
                 if response.status >= 400:
+                    if _is_auth_payload(payload):
+                        raise GizwitsAuthError(
+                            f"HTTP {response.status}: {payload}"
+                        )
                     raise GizwitsApiError(
                         f"HTTP {response.status}: {payload}"
                     )
@@ -109,7 +137,9 @@ class GizwitsApiClient:
         devices: list[GizwitsDevice] = []
         skip = 0
         while True:
-            payload = await self._request("GET", f"/app/bindings?limit=20&skip={skip}")
+            payload = await self._request(
+                "GET", f"/app/bindings?limit=20&skip={skip}"
+            )
             page = payload.get("devices", []) if isinstance(payload, dict) else []
             for item in page:
                 devices.append(
@@ -125,7 +155,9 @@ class GizwitsApiClient:
                 return devices
             skip += len(page)
 
-    async def async_resolve_device(self, did: str | None, device_name: str | None) -> GizwitsDevice:
+    async def async_resolve_device(
+        self, did: str | None, device_name: str | None
+    ) -> GizwitsDevice:
         devices = await self.async_get_bindings()
         if did:
             for device in devices:
@@ -137,15 +169,25 @@ class GizwitsApiClient:
         if not target:
             raise GizwitsApiError("Missing did or device name")
 
-        exact = [device for device in devices if device.name.strip().casefold() == target]
+        exact = [
+            device
+            for device in devices
+            if device.name.strip().casefold() == target
+        ]
         if len(exact) == 1:
             return exact[0]
 
-        fuzzy = [device for device in devices if target in device.name.strip().casefold()]
+        fuzzy = [
+            device
+            for device in devices
+            if target in device.name.strip().casefold()
+        ]
         if len(fuzzy) == 1:
             return fuzzy[0]
         if len(fuzzy) > 1:
-            names = ", ".join(f"{device.name} ({device.did})" for device in fuzzy)
+            names = ", ".join(
+                f"{device.name} ({device.did})" for device in fuzzy
+            )
             raise GizwitsApiError(f"Multiple devices matched: {names}")
         raise GizwitsApiError(f"Device not found: {device_name}")
 
