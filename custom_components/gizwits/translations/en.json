@@ -32,5 +32,30 @@
     "abort": {
       "already_configured": "This device is already configured"
     }
+  },
+  "entity": {
+    "sensor": {
+      "p_value_p1": {
+        "name": "Active power"
+      },
+      "q_value_p1": {
+        "name": "Reactive power"
+      },
+      "i_value_p1": {
+        "name": "Current"
+      },
+      "u_value": {
+        "name": "Voltage"
+      },
+      "f_value": {
+        "name": "Frequency"
+      },
+      "e_value": {
+        "name": "Energy"
+      },
+      "pf_value_p1": {
+        "name": "Power factor"
+      }
+    }
   }
 }

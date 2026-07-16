@@ -32,5 +32,30 @@
     "abort": {
       "already_configured": "该设备已配置"
     }
+  },
+  "entity": {
+    "sensor": {
+      "p_value_p1": {
+        "name": "有功功率"
+      },
+      "q_value_p1": {
+        "name": "无功功率"
+      },
+      "i_value_p1": {
+        "name": "电流"
+      },
+      "u_value": {
+        "name": "电压"
+      },
+      "f_value": {
+        "name": "频率"
+      },
+      "e_value": {
+        "name": "用电量"
+      },
+      "pf_value_p1": {
+        "name": "功率因数"
+      }
+    }
   }
 }
